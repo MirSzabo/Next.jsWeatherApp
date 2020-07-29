@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 const Navbar = () => (
   <div>
     {" "}
@@ -14,6 +15,22 @@ const Navbar = () => (
         </Link>
       </li>
     </ul>
+    <style jsx>{`
+      ul {
+        background: #333;
+        list-style: none;
+        display: flex;
+      }
+      ul li {
+        font-size: 18px;
+        margin-right: 20px;
+      }
+      ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+    `}</style>
   </div>
 );
+
 export default Navbar;

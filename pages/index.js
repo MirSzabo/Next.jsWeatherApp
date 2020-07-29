@@ -1,25 +1,26 @@
 import Layout from "../components/Layout";
-import fetch from "isomorphic-unfetch";
+import Forecast from "../components/Forecast";
+import Link from "next/link";
 
-const capital = "Copenhagen";
-const api = "https://api.openweathermap.org/data/2.5/weather?q=";
-const cityName = capital.toLowerCase();
-const key = process.env.API_KEY;
-const units = "&units=metric";
-const url = api + cityName + key + units;
-
-const WeatherApp = () => (
+const WeatherApp = ({ weatherData }) => (
   <Layout>
     <div>
       <h1>Weather Forecast</h1>
+      <Forecast weatherData={weatherData} />
+      <div>
+        <Link href="/details">
+          <a>Click for details</a>
+        </Link>
+      </div>
+      <style jsx>{`
+        a {
+          color: #333;
+          font-weight: bold;
+          text-decoration: none;
+        }
+      `}</style>
     </div>
   </Layout>
 );
-
-WeatherApp.getInitialProps = async () => {
-  const res = await fetch(url);
-  const weatherData = await res.json();
-  return weatherData;
-};
 
 export default WeatherApp;

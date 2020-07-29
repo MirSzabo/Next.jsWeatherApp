@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+
 const Layout = (props) => (
   <div>
     <Head>
@@ -9,4 +10,5 @@ const Layout = (props) => (
     {props.children}
   </div>
 );
+
 export default Layout;

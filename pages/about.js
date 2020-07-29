@@ -1,8 +1,9 @@
 import Layout from "../components/Layout";
+
 const About = () => (
   <Layout>
     <div>
-      <h1>About the application</h1>
+      <p>Weather forecast page created with React and Next.js by Miroslava Szabo</p>
     </div>
   </Layout>
 );
