@@ -1,8 +1,10 @@
-import Layout from "../components/Layout";
+import { useRouter } from "next/router";
+import fetch from "isomorphic-unfetch";
+import Layout from "../../components/Layout";
 
-const Details = ({ weatherData }) => {
+export default function City({ weatherData }) {
+  const router = useRouter();
   const {
-    name,
     sys: { sunrise, sunset },
     main: { temp, humidity, feels_like },
     wind: { speed },
@@ -13,9 +15,13 @@ const Details = ({ weatherData }) => {
   };
   const dateSunrise = formatTime(new Date(sunrise * 1000));
   const dateSunset = formatTime(new Date(sunset * 1000));
+
   return (
     <Layout>
-      <h2>Weather in {name}</h2>
+      <div>
+        Temperature in {router.query.city} is {temp} <span>&#8451;</span>
+      </div>
+      <h3>Details</h3>
       <span>
         <b>Temperature: </b>
         {temp} <span>&#8451;</span>
@@ -42,6 +48,15 @@ const Details = ({ weatherData }) => {
       </div>
     </Layout>
   );
-};
+}
 
-export default Details;
+City.getInitialProps = async (ctx) => {
+  const { query } = ctx;
+  const api = "https://api.openweathermap.org/data/2.5/weather?q=";
+  const cityName = query.city.toLowerCase();
+  const key = process.env.API_KEY;
+  const units = "&units=metric";
+  const res = await fetch(api + cityName + key + units);
+  const data = await res.json();
+  return { weatherData: data };
+};
