@@ -4,7 +4,7 @@ import Head from "next/head";
 const Layout = (props) => (
   <div>
     <Head>
-      <title>Weather</title>
+      <title>Forecast</title>
     </Head>
     <Navbar />
     {props.children}
